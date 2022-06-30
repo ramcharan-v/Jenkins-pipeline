@@ -31,12 +31,6 @@
 				<artifactId>mule-maven-plugin</artifactId>
 				<version>${mule.maven.plugin.version}</version>
 				<extensions>true</extensions>
-			</plugin>
-			<plugin>
-				<groupId>org.mule.tools.maven</groupId>
-				<artifactId>mule-maven-plugin</artifactId>
-				<version>${mule.maven.plugin.version}</version>
-				<extensions>true</extensions>
 				<configuration>
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
@@ -44,13 +38,9 @@
 						<username>${username}</username>
 						<password>${password}</password>
 						<environment>${environment}</environment>
-						<applicationName>jenkins-integration-api-${environment}</applicationName>
 						<workerType>${workerType}</workerType>
 						<workers>${workers}</workers>
 						<objectStoreV2>true</objectStoreV2>
-						<properties>
-							<env>${properties}</env>
-						</properties>
 					</cloudHubDeployment>
 				</configuration>
 			</plugin>
