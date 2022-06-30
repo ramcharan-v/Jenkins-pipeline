@@ -1,34 +1,36 @@
 pipeline {
+
   agent any
-  
-	stages {
-        stage('Build and Deploy to Anypoint Platform'){ 
-	        steps {
-		        script{
-		       
-    		        //defining environment variables based on the opted environment from the job
-    
-    		        def deployenv =params.env	        
-    		        
-    		        def versionv = deployenv+'_DEPLOY_MULE_VERSION'
-    		       
-    		        def deployusernamev= deployenv+'_DEPLOY_USERNAME'
-    		        def deploypasswordv=deployenv+'_DEPLOY_PASSWORD'
-    		        def deployworkersv=deployenv+'_workers'
-    		        def deployworkerTypev=deployenv+'_workerType'
-    		        
-                    //Assigning respective variables for deployment
-                    def version = env."${versionv}"
-                    def deployusername=env."${deployusernamev}"
-                    def deploypassword=env."${deploypasswordv}"
-                    def deployworkers=env."${deployworkersv}"
-                    def deployworkerType=env."${deployworkerTypev}"
-    		        
-                    bat """mvn clean package deploy -DmuleVersion=${version} -Dusername=${deployusername} -Dpassword=${deploypassword} -Denvironment=${deployenv} -Dworkers=${deployworkers} -DworkerType=${deployworkerType} -Dproperties=${deployenv} -DmuleDeploy"""
-				}
-			}
-	    }
+  environment {
+    //adding a comment for the commit test
+    DEPLOY_CREDS = credentials('deploy-anypoint-user')
+    MULE_VERSION = '4.3.0'
+    BG = "NA"
+    WORKER = "Micro"
+    M2SETTINGS = "C:\\Users\\workshop\\.m2\\settings.xml" 
+  }
+  stages {
+    stage('Build') {
+      steps {
+            bat 'mvn -B -U -e -V clean -gs %M2SETTINGS% -DskipTests package'
+      }
     }
+
+    stage('Test') {
+      steps {
+          bat "mvn test"
+      }
+    }
+
+     stage('Deploy Development') {
+      environment {
+        ENVIRONMENT = 'Sandbox'
+        APP_NAME = 'sandbox-omni-channel-api-demo'
+      }
+      steps {
+            bat 'mvn -U -V -e -B -gs %M2SETTINGS% -DskipTests deploy -DmuleDeploy -Dmule.version="%MULE_VERSION%" -Danypoint.username="%DEPLOY_CREDS_USR%" -Danypoint.password="%DEPLOY_CREDS_PSW%" -Dcloudhub.app="%APP_NAME%" -Dcloudhub.environment="%ENVIRONMENT%" -Dcloudhub.bg="%BG%" -Dcloudhub.worker="%WORKER%"'
+      }
+    }
+    
+  }
 }
-
-

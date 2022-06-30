@@ -34,18 +34,18 @@
 				<configuration>
 					<cloudHubDeployment>
 						<uri>https://anypoint.mulesoft.com</uri>
-						<muleVersion>${muleVersion}</muleVersion>
-						<username>${username}</username>
-						<password>${password}</password>
-						<environment>${environment}</environment>
-						<applicationName>jenkins-integration-api-${environment}</applicationName>
-			            <workers>${workers}</workers>
-			            <workerType>${workerType}</workerType>
+						<muleVersion>${mule.version}</muleVersion>
+						<!-- Deploy User Parameter -->
+						<username>${anypoint.username}</username>
+						<password>${anypoint.password}</password>
+						<!-- Environment Parameter -->
+						<environment>${cloudhub.environment}</environment>
+						<applicationName>${cloudhub.app}</applicationName>
+						<businessGroup>${cloudhub.bg}</businessGroup>
+						<workerType>${cloudhub.worker}</workerType>
 						<objectStoreV2>true</objectStoreV2>
-						<properties>
-							<env>${properties}</env>
-						</properties>
 					</cloudHubDeployment>
+
 				</configuration>
 			</plugin>
 		</plugins>
