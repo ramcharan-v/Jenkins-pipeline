@@ -5,7 +5,7 @@ pipeline {
         stage(' Deploy to Cloudhub'){ 
 	        steps {
     		        
-                    bat 'mvn clean package deploy -DmuleVersion=4.3.0 -Dusername=ramcharan-voodarla -Dpassword=Rcmanu@6590 -Dbusiness=PwC-I-Emerging-Tech -Denvironment=Sandbox -Dworkers=1 -DworkerType=Micro  -DmuleDeploy'
+                    bat 'mvn clean package deploy -DmuleVersion=4.3.0 -Dusername=ram-charan -Dpassword=Rcmanu@6590 -Dbusiness=NA -Denvironment=Sandbox -DmuleDeploy'
 				}
 			}
 	    }
