@@ -37,9 +37,14 @@
 						<muleVersion>${muleVersion}</muleVersion>
 						<username>${username}</username>
 						<password>${password}</password>
-						<businessGroup>${business}</businessGroup>
 						<environment>${environment}</environment>
+						<applicationName>jenkins-integration-api-${environment}</applicationName>
+			            <workers>${workers}</workers>
+			            <workerType>${workerType}</workerType>
 						<objectStoreV2>true</objectStoreV2>
+						<properties>
+							<env>${properties}</env>
+						</properties>
 					</cloudHubDeployment>
 				</configuration>
 			</plugin>
