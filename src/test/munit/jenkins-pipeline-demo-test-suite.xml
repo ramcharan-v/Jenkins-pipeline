@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="jenkins-pipeline-demo-test-suite.xml" />
+	<munit:test name="jenkins-pipeline-demo-test-suite-jenkins-pipeline-demoFlowTest" doc:id="1e2fc6f1-7c8e-4dcc-b36b-153c4c44d6d6" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to jenkins-pipeline-demoFlow" doc:id="20ece39f-844e-4ce5-821b-06a4dd304171" name="jenkins-pipeline-demoFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<logger level="INFO" doc:name="Logger" doc:id="ac9eb2d1-208d-48e4-949f-59dc4bcfc212" message="#[payload]"/>
+			<munit-tools:assert doc:name="Assert expression" doc:id="8ad99e4c-68d4-44ea-b64d-9b499a3d961a" />
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
